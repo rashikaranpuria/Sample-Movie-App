@@ -1,7 +1,9 @@
 package android.rashi.com.sample_movie_app.data
 
+import android.rashi.com.sample_movie_app.ImmediateSchedulerRule
 import android.rashi.com.sample_movie_app.data.api.IApiManager
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -9,6 +11,9 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class DataManagerTest {
+
+    @get:Rule
+    var immediateSchedulerRule = ImmediateSchedulerRule()
 
     @Mock
     lateinit var mApiManager: IApiManager

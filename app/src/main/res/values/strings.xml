@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sample-Movie-App</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="movie_thumb">movie thumb</string>
 </resources>
