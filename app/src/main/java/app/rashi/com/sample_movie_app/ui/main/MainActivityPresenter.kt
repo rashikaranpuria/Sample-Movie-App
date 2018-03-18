@@ -11,7 +11,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainActivityPresenter<V: IMainActivityView> @Inject constructor(val mDataManager: IDataManager, val mCompositeDisposable: CompositeDisposable): BasePresenter<V>(), IMainActivityPresenter<V> {
+class MainActivityPresenter<V : IMainActivityView> @Inject constructor(private val mDataManager: IDataManager, private val mCompositeDisposable: CompositeDisposable) : BasePresenter<V>(), IMainActivityPresenter<V> {
     override fun onAttach(v: V) {
         super.onAttach(v)
         view?.showProgressBar()
@@ -29,9 +29,7 @@ class MainActivityPresenter<V: IMainActivityView> @Inject constructor(val mDataM
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-
-                })
+                .subscribe {})
 
         mCompositeDisposable.add(mDataManager
                 .fetchMoviesFromDatabase()

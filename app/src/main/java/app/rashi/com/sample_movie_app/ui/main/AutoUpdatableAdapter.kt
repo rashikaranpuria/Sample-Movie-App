@@ -1,6 +1,5 @@
 package app.rashi.com.sample_movie_app.ui.main
 
-
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 

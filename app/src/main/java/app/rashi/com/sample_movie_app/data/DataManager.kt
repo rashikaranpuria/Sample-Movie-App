@@ -21,5 +21,4 @@ class DataManager @Inject constructor(val mApiManager: IApiManager, val mDbManag
     override fun fetchMoviesFromAPI(): Single<MovieResponse> {
         return mApiManager.fetchMoviesFromApi()
     }
-
 }

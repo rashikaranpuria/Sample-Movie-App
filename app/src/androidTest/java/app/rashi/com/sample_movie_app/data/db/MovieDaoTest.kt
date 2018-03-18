@@ -30,17 +30,16 @@ class MovieDaoTest {
     @Test
     fun shouldInsertListOfMovies() {
         //given
-        val movieList = arrayListOf(Movie(1,"t",""),Movie(3,"tdf",""))
+        val movieList = arrayListOf(Movie(1, "t", ""), Movie(3, "tdf", ""))
         //when
         database.movieDao().insertAll(movieList)
         //then
         database.movieDao().getMovieById(1).test().assertValueCount(1)
         database.movieDao().getMovieById(3).test().assertValueCount(1)
-
     }
 
     @After
-    fun clear()  {
+    fun clear() {
         database.close()
     }
 
@@ -49,12 +48,12 @@ class MovieDaoTest {
         //when
         database.movieDao().insertMovie(MOVIE_ITEM)
         //then
-        database.movieDao().getMovieById(MOVIE_ITEM.id).test().assertValue{
+        database.movieDao().getMovieById(MOVIE_ITEM.id).test().assertValue {
             it.poster_path == MOVIE_ITEM.poster_path && it.title == MOVIE_ITEM.title
         }
     }
 
     companion object {
-        val MOVIE_ITEM = Movie(1,"shawshank","/der.jpf")
+        val MOVIE_ITEM = Movie(1, "shawshank", "/der.jpf")
     }
 }

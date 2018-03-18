@@ -20,7 +20,7 @@ class MainActivityModule(val context: Context) {
     fun provideContext() = context
 
     @Provides
-    fun provideMainActivityPresenter(mainActivityPresenter: MainActivityPresenter<IMainActivityView>):IMainActivityPresenter<IMainActivityView> = mainActivityPresenter
+    fun provideMainActivityPresenter(mainActivityPresenter: MainActivityPresenter<IMainActivityView>): IMainActivityPresenter<IMainActivityView> = mainActivityPresenter
 
     @Provides
     fun provideCompositeDisposable() = CompositeDisposable()

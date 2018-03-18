@@ -1,9 +1,9 @@
 package app.rashi.com.sample_movie_app.ui.detail
 
 import android.os.Bundle
-import app.rashi.com.sample_movie_app.R
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import app.rashi.com.sample_movie_app.R
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AppCompatActivity() {

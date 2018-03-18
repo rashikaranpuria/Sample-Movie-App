@@ -12,8 +12,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-
-
 class MainActivity : BaseActivity(), IMainActivityView {
 
     @Inject
@@ -28,8 +26,8 @@ class MainActivity : BaseActivity(), IMainActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        (application as MovieApplication).movieComponent.
-                mainActivityComponent(MainActivityModule(this)).inject(this)
+        (application as MovieApplication).movieComponent
+                .mainActivityComponent(MainActivityModule(this)).inject(this)
 
         // setup Recyclerview
         movie_list.setHasFixedSize(true)
@@ -59,5 +57,4 @@ class MainActivity : BaseActivity(), IMainActivityView {
     override fun showProgressBar() {
         mProgressDialog.show()
     }
-
 }

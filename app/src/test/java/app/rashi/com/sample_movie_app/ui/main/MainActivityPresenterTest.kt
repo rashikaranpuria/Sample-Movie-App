@@ -13,7 +13,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.io.IOException
 import org.mockito.Mockito.`when` as _when
@@ -79,7 +79,6 @@ class MainActivityPresenterTest {
         mMainActivityPresenter.onAttach(mMainActivity)
         // then
         verify(mMainActivity).hideProgressDialog()
-
     }
 
     @Test
@@ -89,7 +88,6 @@ class MainActivityPresenterTest {
         mMainActivityPresenter.onAttach(mMainActivity)
         // then
         verify(mDataManager).addMoviesToDatabase(ArgumentMatchers.anyListOf(Movie::class.java))
-
     }
 
     @Test
@@ -98,7 +96,6 @@ class MainActivityPresenterTest {
         mMainActivityPresenter.onAttach(mMainActivity)
         // then
         verify(mMainActivity).addMoviesToList(movies)
-
     }
 
     @Test
@@ -111,6 +108,5 @@ class MainActivityPresenterTest {
         // then
         verify(mMainActivity).hideProgressDialog()
         verify(mMainActivity).showError(exception.localizedMessage)
-
     }
 }

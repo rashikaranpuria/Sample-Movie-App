@@ -7,7 +7,7 @@ import android.content.Context
 import app.rashi.com.sample_movie_app.data.db.entities.Movie
 
 @Database(entities = [Movie::class], version = 1)
-abstract class MovieDatabase:RoomDatabase (){
+abstract class MovieDatabase : RoomDatabase () {
     abstract fun movieDao(): MovieDao
 
     companion object {

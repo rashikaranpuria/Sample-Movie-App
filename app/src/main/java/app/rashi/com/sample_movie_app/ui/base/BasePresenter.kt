@@ -1,6 +1,6 @@
 package app.rashi.com.sample_movie_app.ui.base
 
-open class BasePresenter<V: IBaseView>: IBasePresenter<V>  {
+open class BasePresenter<V : IBaseView> : IBasePresenter<V> {
 
     var view: V? = null
 

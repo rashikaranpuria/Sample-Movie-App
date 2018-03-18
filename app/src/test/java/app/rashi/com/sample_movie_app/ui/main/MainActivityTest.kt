@@ -38,7 +38,6 @@ class MainActivityTest {
         mMainActivity.showProgressBar()
         // verify
         verify(mProgressDialog).show()
-
     }
 
     @Test
@@ -49,7 +48,6 @@ class MainActivityTest {
         mMainActivity.hideProgressDialog()
         // verify
         verify(mProgressDialog).hide()
-
     }
 
     @Test

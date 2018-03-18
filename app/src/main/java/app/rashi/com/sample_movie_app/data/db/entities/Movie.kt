@@ -8,11 +8,11 @@ import android.arch.persistence.room.PrimaryKey
 data class Movie(
     @PrimaryKey
     @ColumnInfo
-     val id: Int,
+    val id: Int,
 
     @ColumnInfo
-     val title: String,
+    val title: String,
 
     @ColumnInfo
-     val poster_path: String
+    val poster_path: String
 )

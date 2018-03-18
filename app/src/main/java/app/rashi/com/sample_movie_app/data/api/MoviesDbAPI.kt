@@ -13,5 +13,5 @@ interface MoviesDbAPI {
     fun getTopRatedMovies(): Single<MovieResponse>
 
     @GET("{movie_id}?api_key=${BuildConfig.API_KEY}")
-    fun getMovieDetail(@Path("movie_id") movie_id:String):Single<MovieDetailResponse>
+    fun getMovieDetail(@Path("movie_id") movie_id: String): Single<MovieDetailResponse>
 }

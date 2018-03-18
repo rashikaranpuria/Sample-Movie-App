@@ -12,25 +12,24 @@ import app.rashi.com.sample_movie_app.data.db.entities.Movie
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
-class MovieAdapter(var context: Context): RecyclerView.Adapter<MovieAdapter.movieViewHolder>(), AutoUpdatableAdapter {
+class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(), AutoUpdatableAdapter {
 
     var movieList: List<Movie> by Delegates.observable(emptyList()) {
-        property, oldList, newList ->
+        _, oldList, newList ->
         autoNotify(oldList, newList) { o, n -> o.id == n.id }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): movieViewHolder {
-        return movieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, null, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        return MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, null, false))
     }
 
     override fun getItemCount(): Int = movieList.count()
 
-    override fun onBindViewHolder(holder: movieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movieList.get(position))
     }
 
-
-    inner class movieViewHolder( var v: View):RecyclerView.ViewHolder(v) {
+    inner class MovieViewHolder(private var v: View) : RecyclerView.ViewHolder(v) {
         var titleView: TextView = v.findViewById(R.id.textView)
         var posterView: ImageView = v.findViewById(R.id.movie_poster)
 
