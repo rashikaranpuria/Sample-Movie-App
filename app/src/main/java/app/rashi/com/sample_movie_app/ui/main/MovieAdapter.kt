@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import app.rashi.com.sample_movie_app.R
-import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.ResultsItem
+import app.rashi.com.sample_movie_app.data.db.entities.Movie
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
 class MovieAdapter(var context: Context): RecyclerView.Adapter<MovieAdapter.movieViewHolder>(), AutoUpdatableAdapter {
 
-    var movieList: List<ResultsItem> by Delegates.observable(emptyList()) {
+    var movieList: List<Movie> by Delegates.observable(emptyList()) {
         property, oldList, newList ->
         autoNotify(oldList, newList) { o, n -> o.id == n.id }
     }
@@ -34,9 +34,9 @@ class MovieAdapter(var context: Context): RecyclerView.Adapter<MovieAdapter.movi
         var titleView: TextView = v.findViewById(R.id.textView)
         var posterView: ImageView = v.findViewById(R.id.movie_poster)
 
-        fun bind(movieItem: ResultsItem) {
+        fun bind(movieItem: Movie) {
             titleView.text = movieItem.title
-            Picasso.with(context).load("http://image.tmdb.org/t/p/w342/${movieItem.posterPath}").into(posterView)
+            Picasso.with(context).load("http://image.tmdb.org/t/p/w342/${movieItem.poster_path}").into(posterView)
         }
     }
 }

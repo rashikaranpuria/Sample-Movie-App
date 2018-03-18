@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/movie_poster"
         android:layout_width="match_parent"
-        android:layout_height="522dp"
+        android:layout_height="match_parent"
         android:contentDescription="@string/movie_thumb"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"

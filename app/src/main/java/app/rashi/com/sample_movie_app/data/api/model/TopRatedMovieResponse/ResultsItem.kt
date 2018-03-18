@@ -1,7 +1,7 @@
 package app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse
 
-import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
+import javax.annotation.Generated
 
 @Generated("com.robohorse.robopojogenerator")
 data class ResultsItem(
@@ -19,13 +19,13 @@ data class ResultsItem(
 	val video: Boolean? = null,
 
 	@field:SerializedName("title")
-	val title: String? = null,
+	val title: String,
 
 	@field:SerializedName("genre_ids")
 	val genreIds: List<Int?>? = null,
 
 	@field:SerializedName("poster_path")
-	val posterPath: String? = null,
+	val posterPath: String,
 
 	@field:SerializedName("backdrop_path")
 	val backdropPath: String? = null,
@@ -40,7 +40,7 @@ data class ResultsItem(
 	val voteAverage: Double? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("adult")
 	val adult: Boolean? = null,

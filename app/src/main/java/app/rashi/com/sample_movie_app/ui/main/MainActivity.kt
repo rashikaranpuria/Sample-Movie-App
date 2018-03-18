@@ -3,10 +3,9 @@ package app.rashi.com.sample_movie_app.ui.main
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import app.rashi.com.sample_movie_app.MovieApplication
 import app.rashi.com.sample_movie_app.R
-import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.ResultsItem
+import app.rashi.com.sample_movie_app.data.db.entities.Movie
 import app.rashi.com.sample_movie_app.di.Modules.MainActivityModule
 import app.rashi.com.sample_movie_app.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,7 +44,7 @@ class MainActivity : BaseActivity(), IMainActivityView {
         mMainActivityPresenter.onDetach()
     }
 
-    override fun addMoviesToList(results: List<ResultsItem>) {
+    override fun addMoviesToList(results: List<Movie>) {
         mAdapter.movieList = results
     }
 

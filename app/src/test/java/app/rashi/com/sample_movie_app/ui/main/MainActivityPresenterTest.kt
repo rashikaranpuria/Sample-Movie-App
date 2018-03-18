@@ -3,12 +3,14 @@ package app.rashi.com.sample_movie_app.ui.main
 import app.rashi.com.sample_movie_app.ImmediateSchedulerRule
 import app.rashi.com.sample_movie_app.data.IDataManager
 import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.MovieResponse
-import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.ResultsItem
+import app.rashi.com.sample_movie_app.data.db.entities.Movie
+import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
@@ -36,15 +38,18 @@ class MainActivityPresenterTest {
     @Mock
     lateinit var movieResponse: MovieResponse
 
+    @Mock
+    lateinit var movies: List<Movie>
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         _when(mDataManager.fetchMoviesFromAPI()).thenReturn(Single.just(movieResponse))
-
+        _when(mDataManager.fetchMoviesFromDatabase()).thenReturn(Flowable.just(movies))
     }
 
     @Test
-    fun onAttachFetchMoviesMethodFromDataMangerCalled() {
+    fun fetchMoviesMethodFromDataMangerCalled_WhenPresenterAttached() {
         // when
         mMainActivityPresenter.onAttach(mMainActivity)
         // then
@@ -52,7 +57,15 @@ class MainActivityPresenterTest {
     }
 
     @Test
-    fun showProgressBar_WhileFetchingData() {
+    fun fetchMoviesFromDatabaseCalled_WhenPresenterAttached() {
+        // when
+        mMainActivityPresenter.onAttach(mMainActivity)
+        // then
+        verify(mDataManager).fetchMoviesFromDatabase()
+    }
+
+    @Test
+    fun showProgressBar_WhileFetchingDataFromDatabase() {
         // when
         mMainActivityPresenter.onAttach(mMainActivity)
         // then
@@ -60,7 +73,7 @@ class MainActivityPresenterTest {
     }
 
     @Test
-    fun shouldHideProgressDialog_WhenNetworkRequestCompleteSuccessfully() {
+    fun shouldHideProgressDialog_WhenDatabaseReturnedMoviesSuccessfully() {
 
         // when
         mMainActivityPresenter.onAttach(mMainActivity)
@@ -70,19 +83,29 @@ class MainActivityPresenterTest {
     }
 
     @Test
-    fun shouldCallShowList_WhenNetworkRequestCompleteSuccessfully() {
+    fun shouldSaveDataInDatabase_WhenNetworkRequestCompleteSuccessfully() {
+
         // when
         mMainActivityPresenter.onAttach(mMainActivity)
         // then
-        verify(mMainActivity).addMoviesToList(movieResponse.results as List<ResultsItem>)
+        verify(mDataManager).addMoviesToDatabase(ArgumentMatchers.anyListOf(Movie::class.java))
 
     }
 
     @Test
-    fun shouldHideProgressDialog_WhenNetworkRequestFails() {
+    fun shouldCallShowList_WhenMoviesFetchedFromDatabase() {
+        // when
+        mMainActivityPresenter.onAttach(mMainActivity)
+        // then
+        verify(mMainActivity).addMoviesToList(movies)
+
+    }
+
+    @Test
+    fun shouldHideProgressDialog_WhenDatabaseFetchFails() {
         // given
         val exception = IOException("")
-        _when(mDataManager.fetchMoviesFromAPI()).thenReturn(Single.error(exception))
+        _when(mDataManager.fetchMoviesFromDatabase()).thenReturn(Flowable.error(exception))
         // when
         mMainActivityPresenter.onAttach(mMainActivity)
         // then

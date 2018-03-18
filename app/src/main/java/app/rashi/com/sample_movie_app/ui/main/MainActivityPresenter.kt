@@ -1,7 +1,10 @@
 package app.rashi.com.sample_movie_app.ui.main
 
 import app.rashi.com.sample_movie_app.data.IDataManager
+import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.ResultsItem
+import app.rashi.com.sample_movie_app.data.db.entities.Movie
 import app.rashi.com.sample_movie_app.ui.base.BasePresenter
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -14,12 +17,31 @@ class MainActivityPresenter<V: IMainActivityView> @Inject constructor(val mDataM
         view?.showProgressBar()
         mCompositeDisposable.add(mDataManager
                 .fetchMoviesFromAPI()
+                .map {
+                    it.results?.filterNotNull()?.map {
+                        it.toMovie()
+                    }
+                }
+                .flatMapCompletable {
+                    Completable.fromAction {
+                        mDataManager.addMoviesToDatabase(it)
+                    }
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+
+                })
+
+        mCompositeDisposable.add(mDataManager
+                .fetchMoviesFromDatabase()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribeBy (
-                        onSuccess = {
+                        onNext = {
                             view?.hideProgressDialog()
-                            it.results?.let { view?.addMoviesToList(it.filterNotNull()) }
+                            view?.addMoviesToList(it)
                         },
                         onError = {
                             view?.hideProgressDialog()
@@ -33,3 +55,5 @@ class MainActivityPresenter<V: IMainActivityView> @Inject constructor(val mDataM
         mCompositeDisposable.dispose()
     }
 }
+
+private fun ResultsItem.toMovie() = Movie(id, title, posterPath)
