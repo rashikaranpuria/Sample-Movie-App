@@ -3,15 +3,18 @@ package app.rashi.com.sample_movie_app.ui.main
 import android.app.ProgressDialog
 import app.rashi.com.sample_movie_app.BuildConfig
 import app.rashi.com.sample_movie_app.FakeApplication
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowToast
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, application = FakeApplication::class)
@@ -48,5 +51,14 @@ class MainActivityTest {
         // verify
         verify(mProgressDialog).hide()
 
+    }
+
+    @Test
+    fun toastShown_WhenShowErrorCalled() {
+        // given
+        // when
+        mMainActivity.showError(ArgumentMatchers.anyString())
+        // verify
+        assertEquals(ShadowToast.getTextOfLatestToast(), ArgumentMatchers.anyString())
     }
 }

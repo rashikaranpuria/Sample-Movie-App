@@ -1,0 +1,42 @@
+package app.rashi.com.sample_movie_app.ui.main
+
+import android.content.Context
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import app.rashi.com.sample_movie_app.R
+import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.ResultsItem
+import com.squareup.picasso.Picasso
+import kotlin.properties.Delegates
+
+class MovieAdapter(var context: Context): RecyclerView.Adapter<MovieAdapter.movieViewHolder>(), AutoUpdatableAdapter {
+
+    var movieList: List<ResultsItem> by Delegates.observable(emptyList()) {
+        property, oldList, newList ->
+        autoNotify(oldList, newList) { o, n -> o.id == n.id }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): movieViewHolder {
+        return movieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, null, false))
+    }
+
+    override fun getItemCount(): Int = movieList.count()
+
+    override fun onBindViewHolder(holder: movieViewHolder, position: Int) {
+        holder.bind(movieList.get(position))
+    }
+
+
+    inner class movieViewHolder( var v: View):RecyclerView.ViewHolder(v) {
+        var titleView: TextView = v.findViewById(R.id.textView)
+        var posterView: ImageView = v.findViewById(R.id.movie_poster)
+
+        fun bind(movieItem: ResultsItem) {
+            titleView.text = movieItem.title
+            Picasso.with(context).load("http://image.tmdb.org/t/p/w342/${movieItem.posterPath}").into(posterView)
+        }
+    }
+}

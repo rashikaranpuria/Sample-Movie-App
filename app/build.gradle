@@ -11,7 +11,9 @@ def getAPIKey() {
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     return properties.getProperty("API_KEY");
 }
-
+configurations {
+    ktlint
+}
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -45,8 +47,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:cardview-v7:27.1.0'
-    compile 'com.android.support:recyclerview-v7:27.1.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // Test
     implementation 'com.android.support:design:27.1.0'
@@ -71,5 +73,22 @@ dependencies {
     // Anko
     implementation "org.jetbrains.anko:anko:0.10.4"
 
+    // ktlint
+    ktlint "com.github.shyiko:ktlint:0.15.0"
 
+
+}
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    //args "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+}
+check.dependsOn ktlint
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "-F", "src/**/*.kt"
 }

@@ -19,7 +19,7 @@ class MainActivityPresenter<V: IMainActivityView> @Inject constructor(val mDataM
                 .subscribeBy (
                         onSuccess = {
                             view?.hideProgressDialog()
-                            it.results?.let { it1 -> view?.addMoviesToList(it1) }
+                            it.results?.let { view?.addMoviesToList(it.filterNotNull()) }
                         },
                         onError = {
                             view?.hideProgressDialog()

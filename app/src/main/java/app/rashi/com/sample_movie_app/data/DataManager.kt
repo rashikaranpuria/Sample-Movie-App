@@ -5,7 +5,7 @@ import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.Movie
 import io.reactivex.Single
 import javax.inject.Inject
 
-class DataManager @Inject constructor(val mApiManager: IApiManager): IDataManager {
+class DataManager @Inject constructor(val mApiManager: IApiManager) : IDataManager {
 
     override fun fetchMoviesFromAPI(): Single<MovieResponse> {
         return mApiManager.fetchMoviesFromApi()

@@ -6,6 +6,7 @@ import app.rashi.com.sample_movie_app.di.qualifiers.ActivityContext
 import app.rashi.com.sample_movie_app.ui.main.IMainActivityPresenter
 import app.rashi.com.sample_movie_app.ui.main.IMainActivityView
 import app.rashi.com.sample_movie_app.ui.main.MainActivityPresenter
+import app.rashi.com.sample_movie_app.ui.main.MovieAdapter
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -28,4 +29,7 @@ class MainActivityModule(val context: Context) {
     fun progressDialog() = context.indeterminateProgressDialog(context.getString(R.string.please_wait)).apply {
         hide()
     }
+
+    @Provides
+    fun provideMovieAdapter() = MovieAdapter(context)
 }

@@ -7,5 +7,5 @@ interface IMainActivityView: IBaseView {
     fun showProgressBar()
     fun hideProgressDialog()
     fun showError(errorStr: String)
-    fun addMoviesToList(results: List<ResultsItem?>)
+    fun addMoviesToList(results: List<ResultsItem>)
 }
