@@ -7,7 +7,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
@@ -56,9 +55,10 @@ class MainActivityTest {
     @Test
     fun toastShown_WhenShowErrorCalled() {
         // given
+        val errorStr = "error"
         // when
-        mMainActivity.showError(ArgumentMatchers.anyString())
+        mMainActivity.showError(errorStr)
         // verify
-        assertEquals(ShadowToast.getTextOfLatestToast(), ArgumentMatchers.anyString())
+        assertEquals(ShadowToast.getTextOfLatestToast(), errorStr)
     }
 }
