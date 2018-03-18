@@ -1,5 +1,5 @@
 # Sample-Movie-App
-![Build Status](https://travis-ci.com/aanandshekharroy/google-url-shortener.svg?token=QTYBBUUatk4HyqbxsyoT&branch=master)
+![Build Status](https://travis-ci.org/rashikaranpuria/Sample-Movie-App.svg?branch=master)
 
 ### Important Features
 * **100% Kotlin**

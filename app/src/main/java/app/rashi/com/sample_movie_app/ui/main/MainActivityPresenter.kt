@@ -27,4 +27,9 @@ class MainActivityPresenter<V: IMainActivityView> @Inject constructor(val mDataM
                         }
                 ))
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        mCompositeDisposable.dispose()
+    }
 }

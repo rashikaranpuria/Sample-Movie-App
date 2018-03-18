@@ -26,7 +26,7 @@ class MainActivityModule(val context: Context) {
     fun provideCompositeDisposable() = CompositeDisposable()
 
     @Provides
-    fun progressDialog() = context.indeterminateProgressDialog(context.getString(R.string.please_wait)).apply {
+    fun provideProgressDialog() = context.indeterminateProgressDialog(context.getString(R.string.please_wait)).apply {
         hide()
     }
 

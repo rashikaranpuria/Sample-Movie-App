@@ -3,6 +3,7 @@ package app.rashi.com.sample_movie_app.ui.main
 import app.rashi.com.sample_movie_app.ImmediateSchedulerRule
 import app.rashi.com.sample_movie_app.data.IDataManager
 import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.MovieResponse
+import app.rashi.com.sample_movie_app.data.api.model.TopRatedMovieResponse.ResultsItem
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Before
@@ -44,47 +45,47 @@ class MainActivityPresenterTest {
 
     @Test
     fun onAttachFetchMoviesMethodFromDataMangerCalled() {
-        //when
+        // when
         mMainActivityPresenter.onAttach(mMainActivity)
-        //then
+        // then
         verify(mDataManager).fetchMoviesFromAPI()
     }
 
     @Test
     fun showProgressBar_WhileFetchingData() {
-        //when
+        // when
         mMainActivityPresenter.onAttach(mMainActivity)
-        //then
+        // then
         verify(mMainActivity).showProgressBar()
     }
 
     @Test
     fun shouldHideProgressDialog_WhenNetworkRequestCompleteSuccessfully() {
 
-        //when
+        // when
         mMainActivityPresenter.onAttach(mMainActivity)
-        //then
+        // then
         verify(mMainActivity).hideProgressDialog()
 
     }
 
     @Test
     fun shouldCallShowList_WhenNetworkRequestCompleteSuccessfully() {
-        //when
+        // when
         mMainActivityPresenter.onAttach(mMainActivity)
-        //then
-        verify(mMainActivity).addMoviesToList(movieResponse.results!!)
+        // then
+        verify(mMainActivity).addMoviesToList(movieResponse.results as List<ResultsItem>)
 
     }
 
     @Test
     fun shouldHideProgressDialog_WhenNetworkRequestFails() {
-        //given
+        // given
         val exception = IOException("")
         _when(mDataManager.fetchMoviesFromAPI()).thenReturn(Single.error(exception))
-        //when
+        // when
         mMainActivityPresenter.onAttach(mMainActivity)
-        //then
+        // then
         verify(mMainActivity).hideProgressDialog()
         verify(mMainActivity).showError(exception.localizedMessage)
 
