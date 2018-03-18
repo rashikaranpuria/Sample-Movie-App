@@ -6,16 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <GridLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnCount="2"
-        >
-        <include android:layout="@layout/movie_thumb" />
-        <include android:layout="@layout/movie_thumb" />
-        <include android:layout="@layout/movie_thumb" />
-        <include android:layout="@layout/movie_thumb" />
-        <include android:layout="@layout/movie_thumb" />
-    </GridLayout>
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>
