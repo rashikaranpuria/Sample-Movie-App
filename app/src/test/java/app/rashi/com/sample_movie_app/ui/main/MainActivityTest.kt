@@ -3,8 +3,6 @@ package app.rashi.com.sample_movie_app.ui.main
 import android.app.ProgressDialog
 import app.rashi.com.sample_movie_app.BuildConfig
 import app.rashi.com.sample_movie_app.FakeApplication
-import app.rashi.com.sample_movie_app.data.db.entities.Movie
-import kotlinx.android.synthetic.main.activity_main.*
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -24,22 +22,12 @@ class MainActivityTest {
     @Mock
     lateinit var mProgressDialog: ProgressDialog
 
-//    @Mock
-//    lateinit var mMainActivityPresenter: IMainActivityPresenter<IMainActivityView>
-
-    lateinit var movieAdapter: MovieAdapter
-
-    @Mock
-    lateinit var movies: List<Movie>
-
     lateinit var mMainActivity: MainActivity
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        mMainActivity = Robolectric.buildActivity(MainActivity::class.java).create().start().resume().get()
-//        movieAdapter = MovieAdapter(mMainActivity)
-//        mMainActivity.mAdapter = movieAdapter
+        mMainActivity = Robolectric.buildActivity(MainActivity::class.java).create().get()
     }
 
     @Test
@@ -70,23 +58,5 @@ class MainActivityTest {
         mMainActivity.showError(errorStr)
         // verify
         assertEquals(ShadowToast.getTextOfLatestToast(), errorStr)
-    }
-
-    @Test
-    fun onClickMovieItemCalled_WhenRecyclerViewItemClicked() {
-
-        val m1 = Movie(1, "45", "5454")
-        val list = listOf(m1, m1.copy(id = 2), m1.copy(id = 3))
-
-        // given
-        val recyclerView = mMainActivity.movie_list
-        recyclerView.measure(0, 0)
-        recyclerView.layout(0, 0, 100, 1000)
-//        recyclerView.adapter = movieAdapter
-        mMainActivity.mAdapter.movieList = list
-        // when
-        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
-        // then
-        verify(mMainActivity.mMainActivityPresenter).recyclerViewItemClicked()
     }
 }
