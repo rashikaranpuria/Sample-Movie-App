@@ -7,7 +7,9 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers
-import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.espresso.matcher.ViewMatchers.withText
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.runner.AndroidJUnit4
 import app.rashi.com.sample_movie_app.R
 import org.junit.Rule
@@ -28,10 +30,9 @@ class MainActivityUITest {
     @Test
     fun testSomeItemInRecyclerView() {
         val mv = mActivityRule.activity.mAdapter.movieList
-        val i = mv.count()/2
+        val i = mv.count() / 2
         onView(withId(R.id.movie_list))
                 .perform(RecyclerViewActions.scrollToPosition<MovieAdapter.MovieViewHolder>(i))
         onView(withText(mv.get(i).title)).check(matches(isDisplayed()))
     }
-
 }
