@@ -1,15 +1,22 @@
 # Sample-Movie-App
 ![Build Status](https://travis-ci.org/rashikaranpuria/Sample-Movie-App.svg?branch=master)
 
+App helps users discover, most popular and top rated movies. User can also add movie to favorites and check out favorite movies. Read about movie, overview, release date, ratings and watch trailers and read reviews.
+
 ### Important Features
-* **100% Kotlin**
-* **MVP architecture with RxJava 2** 
-* **Dagger 2 for Dependency Injection**
-* **Used Google's** *Room* **for local database**
-* **Mockito and Robolectric for unit tests**
-* **Espresso for Integration Tests**
-* **Continous Integration with Travis CI**
-* **Ktlint as static code analyzer**
+* **Used Test Driven Development** *(TDD)* **methodology**
+* **Code follows** *MVP* **architecture**
+* **100%** *Kotlin* **code**
+* **Wrote unit tests using** *Mockito, Robolectric*
+* **Wrote UI tests using** *Espresso*
+* **Used** *Dagger 2* **for dependency injection**
+* **Used** *Room* **for storing and managing data in local database**
+* *Ktlint* **as static code analyzer**
+* **Continous Integration with** *Travis CI*
+* *Anko* **library**
+* **Used** *Retrofit* **for network requests**
+* **Follows** *Material Design principles*
+* *Picasso* **library for loading images**
 
 ### TheMovieDB API Key is required.
 
@@ -19,4 +26,4 @@ Include the unique key for the build by adding the following line to [USER_HOME]
 
 `THE_MOVIE_DB_API_KEY="<UNIQUE_API_KEY">`
 
-
+License This code is Copyright (c) 2018 Rashi Karanpuria. It is free software, and may be redistributed under the terms specified in the License file.
