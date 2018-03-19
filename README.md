@@ -7,6 +7,7 @@ App helps users discover, most popular and top rated movies. User can also add m
 * **Used Test Driven Development** *(TDD)* **methodology**
 * **Code follows** *MVP* **architecture**
 * **100%** *Kotlin* **code**
+* **Asynchronous code using** *RxJava*
 * **Wrote unit tests using** *Mockito, Robolectric*
 * **Wrote UI tests using** *Espresso*
 * **Used** *Dagger 2* **for dependency injection**
