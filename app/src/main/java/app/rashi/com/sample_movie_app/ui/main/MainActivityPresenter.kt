@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainActivityPresenter<V : IMainActivityView> @Inject constructor(private val mDataManager: IDataManager, private val mCompositeDisposable: CompositeDisposable) : BasePresenter<V>(), IMainActivityPresenter<V> {
+
     override fun onAttach(v: V) {
         super.onAttach(v)
         view?.showProgressBar()
@@ -51,6 +52,10 @@ class MainActivityPresenter<V : IMainActivityView> @Inject constructor(private v
     override fun onDetach() {
         super.onDetach()
         mCompositeDisposable.dispose()
+    }
+
+    override fun recyclerViewItemClicked() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
 
