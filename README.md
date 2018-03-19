@@ -24,6 +24,6 @@ In order for this app to function properly as of March 17th, 2018 an API key for
 
 Include the unique key for the build by adding the following line to [USER_HOME]/local.properties
 
-`THE_MOVIE_DB_API_KEY="<UNIQUE_API_KEY">`
+`API_KEY="<UNIQUE_API_KEY">`
 
 License This code is Copyright (c) 2018 Rashi Karanpuria. It is free software, and may be redistributed under the terms specified in the License file.
