@@ -7,6 +7,7 @@ App helps users discover, most popular and top rated movies. User can also add m
 * **Used Test Driven Development** *(TDD)* **methodology**
 * **Code follows** *MVP* **architecture**
 * **100%** *Kotlin* **code**
+* **Asynchronous code using** *RxJava*
 * **Wrote unit tests using** *Mockito, Robolectric*
 * **Wrote UI tests using** *Espresso*
 * **Used** *Dagger 2* **for dependency injection**
@@ -24,6 +25,6 @@ In order for this app to function properly as of March 17th, 2018 an API key for
 
 Include the unique key for the build by adding the following line to [USER_HOME]/local.properties
 
-`THE_MOVIE_DB_API_KEY="<UNIQUE_API_KEY">`
+`API_KEY="<UNIQUE_API_KEY">`
 
 License This code is Copyright (c) 2018 Rashi Karanpuria. It is free software, and may be redistributed under the terms specified in the License file.
