@@ -14,6 +14,6 @@ open class MovieApplication : Application() {
         movieComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
-        Stetho.initializeWithDefaults(this);
+        Stetho.initializeWithDefaults(this)
     }
 }

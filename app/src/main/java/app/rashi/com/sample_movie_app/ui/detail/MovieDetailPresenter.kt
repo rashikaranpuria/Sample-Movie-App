@@ -12,7 +12,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MovieDetailPresenter<V: IMovieDetailView> @Inject constructor(private val mDataManager: IDataManager, private val mCompositeDisposable: CompositeDisposable) : BasePresenter<V>(), IMovieDetailPresenter<V> {
+class MovieDetailPresenter<V : IMovieDetailView> @Inject constructor(private val mDataManager: IDataManager, private val mCompositeDisposable: CompositeDisposable) : BasePresenter<V>(), IMovieDetailPresenter<V> {
 
     override fun onAttach(v: V) {
         super.onAttach(v)
@@ -66,11 +66,10 @@ class MovieDetailPresenter<V: IMovieDetailView> @Inject constructor(private val 
                 }
             ))
         // // yes
-          // show view details
+        // show view details
         // // no
-          // fetch from network
-
-    }
+        // fetch from network
+}
 
     override fun onDetach() {
         super.onDetach()

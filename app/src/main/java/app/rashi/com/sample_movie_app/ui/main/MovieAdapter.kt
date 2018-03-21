@@ -14,7 +14,7 @@ import kotlin.properties.Delegates
 
 class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(), AutoUpdatableAdapter {
 
-    lateinit var movieClickListener: (it: Movie)->Unit
+    lateinit var movieClickListener: (it: Movie) -> Unit
 
     var movieList: List<Movie> by Delegates.observable(emptyList()) {
         _, oldList, newList ->

@@ -8,7 +8,11 @@ import io.reactivex.disposables.CompositeDisposable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.*
+import org.mockito.ArgumentMatchers
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.`when` as _when
 
 class MovieDetailPresenterTest {
@@ -31,12 +35,12 @@ class MovieDetailPresenterTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        _when(mDataManager.fetchMovieDetailFromAPI(ArgumentMatchers.anyString())).thenReturn(Single.just(movieDetailResponse))
+        _when(mDataManager.fetchMovieDetailFromAPI(ArgumentMatchers.anyInt())).thenReturn(Single.just(movieDetailResponse))
     }
 
     @Test
     fun fetchMovieDetailFromApiCalled_WhenSetMovieDetailInvoked() {
-        val dummyId = "45"
+        val dummyId = 45
         // when
         mMovieDetailPresenter.setMovieDetail(dummyId)
         // then
@@ -45,7 +49,7 @@ class MovieDetailPresenterTest {
 
     @Test
     fun fetchMovieDetailFromDatabaseCalled_WhenSetMovieDetailInvoked() {
-        val dummyId = "45"
+        val dummyId = 45
         // when
         mMovieDetailPresenter.setMovieDetail(dummyId)
         // then
