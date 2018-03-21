@@ -12,6 +12,10 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class DataManager @Inject constructor(val mApiManager: IApiManager, val mDbManager: IDbManager) : IDataManager {
+    override fun updateMovieDetail(movieId: Int, isFavorite: Boolean) {
+        mDbManager.updateMovieDetail(movieId, isFavorite)
+    }
+
     override fun fetchMovieDetailFromDatabase(movieId: Int): Maybe<MovieDetail> {
         return mDbManager.getMovieDetail(movieId)
     }

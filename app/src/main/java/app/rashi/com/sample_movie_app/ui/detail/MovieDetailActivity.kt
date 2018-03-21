@@ -2,7 +2,6 @@ package app.rashi.com.sample_movie_app.ui.detail
 
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.MenuItem
 import app.rashi.com.sample_movie_app.Constants
 import app.rashi.com.sample_movie_app.MovieApplication
@@ -16,6 +15,18 @@ import kotlinx.android.synthetic.main.content_movie_detail.*
 import javax.inject.Inject
 
 class MovieDetailActivity : BaseActivity(), IMovieDetailView {
+
+    override fun updateFavoriteButtonResource(isFavorite: Boolean) {
+        if (isFavorite) {
+            favButton.setImageResource(R.drawable.ic_favorite)
+        } else {
+            favButton.setImageResource(R.drawable.ic_favorite_border)
+        }
+        this.isFavorite = isFavorite
+    }
+
+    var isFavorite: Boolean = false
+    var mMovieId: Int = -1
 
     @Inject
     lateinit var mMovieDetailPresenter: IMovieDetailPresenter<IMovieDetailView>
@@ -37,22 +48,19 @@ class MovieDetailActivity : BaseActivity(), IMovieDetailView {
 
     private fun initClickListeners() {
         favButton.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            mMovieDetailPresenter.favoriteButtonClicked(isFavorite, mMovieId)
         }
     }
 
     override fun setMovieDetail(movieDetail: MovieDetail) {
+        mMovieId = movieDetail.id
+        isFavorite = movieDetail.favorite
         toolbar_layout.title = movieDetail.title
         Picasso.with(this).load("http://image.tmdb.org/t/p/w342/${movieDetail.poster_path}").into(posterImage)
         overview.text = movieDetail.overview
         release_date.text = movieDetail.release_date
         vote_average.text = movieDetail.vote_average
-        if (movieDetail.favorite) {
-            favButton.setImageResource(R.drawable.ic_favorite)
-        } else {
-            favButton.setImageResource(R.drawable.ic_favorite_border)
-        }
+        updateFavoriteButtonResource(movieDetail.favorite)
     }
 
     override fun onDestroy() {

@@ -18,4 +18,7 @@ interface MovieDetailDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovieDetail(movieDetail: MovieDetail)
+
+    @Query("UPDATE moviedetail SET favorite= :isFavorite WHERE id = :id")
+    fun setIsMovieFavorite(isFavorite: Boolean, id: Int)
 }

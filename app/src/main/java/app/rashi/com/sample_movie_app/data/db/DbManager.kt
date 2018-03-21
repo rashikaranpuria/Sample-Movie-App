@@ -7,6 +7,10 @@ import io.reactivex.Maybe
 import javax.inject.Inject
 
 class DbManager @Inject constructor(val mMovieDao: MovieDao, val mMovieDetailDao: MovieDetailDao) : IDbManager {
+    override fun updateMovieDetail(movieId: Int, isFavorite: Boolean) {
+        mMovieDetailDao.setIsMovieFavorite(isFavorite, movieId)
+    }
+
     override fun getMovieDetail(movieId: Int): Maybe<MovieDetail> {
         return mMovieDetailDao.getMovieDetailById(movieId)
     }

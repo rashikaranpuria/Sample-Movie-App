@@ -10,4 +10,5 @@ interface IDbManager {
     fun addMovies(movies: List<Movie>)
     fun addMovieDetail(movieDetail: MovieDetail)
     fun getMovieDetail(movieId: Int): Maybe<MovieDetail>
+    fun updateMovieDetail(movieId: Int, isFavorite: Boolean)
 }

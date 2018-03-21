@@ -17,4 +17,5 @@ interface IDataManager {
     fun fetchMovieDetailFromAPI(movieId: Int): Single<MovieDetailResponse>
     fun addMovieDetail(movieDetail: MovieDetail)
     fun fetchMovieDetailFromDatabase(movieId: Int): Maybe<MovieDetail>
+    fun updateMovieDetail(movieId: Int, isFavorite: Boolean)
 }

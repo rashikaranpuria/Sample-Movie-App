@@ -13,6 +13,23 @@ import javax.inject.Inject
 
 class MovieDetailPresenter<V : IMovieDetailView> @Inject constructor(private val mDataManager: IDataManager, private val mCompositeDisposable: CompositeDisposable) : BasePresenter<V>(), IMovieDetailPresenter<V> {
 
+    override fun favoriteButtonClicked(isFavorite: Boolean, movieId: Int) {
+        mCompositeDisposable.add(
+                Completable.fromAction {
+                    mDataManager.updateMovieDetail(movieId, !isFavorite)
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeBy(
+                                onComplete = {
+                                    view?.updateFavoriteButtonResource(!isFavorite)
+                                },
+                                onError = {
+                                    view?.showError(it.localizedMessage)
+                                }
+                        )
+        )
+    }
+
     override fun onAttach(v: V) {
         super.onAttach(v)
     }
