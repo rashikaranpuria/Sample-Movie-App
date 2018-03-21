@@ -3,6 +3,7 @@ package app.rashi.com.sample_movie_app.ui.detail
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.view.MenuItem
 import app.rashi.com.sample_movie_app.Constants
 import app.rashi.com.sample_movie_app.MovieApplication
 import app.rashi.com.sample_movie_app.R
@@ -58,5 +59,16 @@ class MovieDetailActivity : BaseActivity(), IMovieDetailView {
         super.onDestroy()
         mMovieDetailPresenter.onDetach()
         mProgressDialog.dismiss()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+        // Respond to the action bar's Up/Home button
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
