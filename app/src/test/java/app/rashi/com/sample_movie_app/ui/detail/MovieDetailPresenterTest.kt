@@ -3,6 +3,8 @@ package app.rashi.com.sample_movie_app.ui.detail
 import app.rashi.com.sample_movie_app.ImmediateSchedulerRule
 import app.rashi.com.sample_movie_app.data.IDataManager
 import app.rashi.com.sample_movie_app.data.api.model.MovieDetailResponse.MovieDetailResponse
+import app.rashi.com.sample_movie_app.data.db.entities.MovieDetail
+import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Before
@@ -32,23 +34,30 @@ class MovieDetailPresenterTest {
     @Mock
     lateinit var movieDetailResponse: MovieDetailResponse
 
+    @Mock
+    lateinit var movieDetail: MovieDetail
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        _when(mDataManager.fetchMovieDetailFromAPI(ArgumentMatchers.anyInt())).thenReturn(Single.just(movieDetailResponse))
-    }
-
-    @Test
-    fun fetchMovieDetailFromApiCalled_WhenSetMovieDetailInvoked() {
-        val dummyId = 45
-        // when
-        mMovieDetailPresenter.setMovieDetail(dummyId)
-        // then
-        Mockito.verify(mDataManager).fetchMovieDetailFromAPI(dummyId)
     }
 
     @Test
     fun fetchMovieDetailFromDatabaseCalled_WhenSetMovieDetailInvoked() {
+        _when(mDataManager.fetchMovieDetailFromDatabase(ArgumentMatchers.anyInt())).thenReturn(Maybe.just(movieDetail))
+
+        val dummyId = 45
+        // when
+        mMovieDetailPresenter.setMovieDetail(dummyId)
+        // then
+        Mockito.verify(mDataManager).fetchMovieDetailFromDatabase(dummyId)
+    }
+
+    @Test
+    fun fetchMovieDetailFromDatabaseCalledButUnSuccessfulSoFetchMovieDetailFromApiCalled_WhenSetMovieDetailInvoked() {
+        _when(mDataManager.fetchMovieDetailFromDatabase(ArgumentMatchers.anyInt())).thenReturn(Maybe.empty())
+        _when(mDataManager.fetchMovieDetailFromAPI(ArgumentMatchers.anyInt())).thenReturn(Single.just(movieDetailResponse))
+
         val dummyId = 45
         // when
         mMovieDetailPresenter.setMovieDetail(dummyId)

@@ -60,10 +60,10 @@ class DataManagerTest {
 
     @Test
     fun shouldCallGetMovieDetailFromAPI_WhenFetchMovieDetailFromAPI() {
-        val dummyId = "45"
+        val dummyId = 45
         // when
         mDataManager.fetchMovieDetailFromAPI(dummyId)
         // given
-        verify(mApiManager).fetchMovieDetail(dummyId)
+        verify(mApiManager).fetchMovieDetail(dummyId.toString())
     }
 }

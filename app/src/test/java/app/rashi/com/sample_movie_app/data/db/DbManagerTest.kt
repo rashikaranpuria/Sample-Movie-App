@@ -14,6 +14,9 @@ class DbManagerTest {
     lateinit var mMovieDao: MovieDao
 
     @Mock
+    lateinit var mMovieDetailDao: MovieDetailDao
+
+    @Mock
     lateinit var movies: List<Movie>
 
     @InjectMocks
