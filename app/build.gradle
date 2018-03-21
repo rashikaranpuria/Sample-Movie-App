@@ -36,8 +36,6 @@ android {
             includeAndroidResources = true
 
         }
-
-
     }
     lintOptions {
         abortOnError false
@@ -92,6 +90,8 @@ dependencies {
 
     implementation "android.arch.persistence.room:rxjava2:1.1.0-alpha3"
 
+    // Stetho
+    implementation 'com.facebook.stetho:stetho:1.5.0'
 }
 task ktlint(type: JavaExec, group: "verification") {
     description = "Check Kotlin code style."

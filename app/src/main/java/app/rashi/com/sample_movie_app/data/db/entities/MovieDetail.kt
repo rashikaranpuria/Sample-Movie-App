@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity
-data class Movie (
+data class MovieDetail (
     @PrimaryKey
     @ColumnInfo
     val id: Int,
@@ -14,5 +14,17 @@ data class Movie (
     val title: String,
 
     @ColumnInfo
-    val poster_path: String
+    val poster_path: String,
+
+    @ColumnInfo
+    val overview: String,
+
+    @ColumnInfo
+    val release_date: String,
+
+    @ColumnInfo
+    val vote_average: String,
+
+    @ColumnInfo
+    val favorite: Boolean = false
 )

@@ -16,7 +16,7 @@ val imdbId: String? = null,
 val video: Boolean? = null,
 
 @field:SerializedName("title")
-val title: String? = null,
+val title: String,
 
 @field:SerializedName("backdrop_path")
 val backdropPath: String? = null,
@@ -34,7 +34,7 @@ val popularity: Double? = null,
 val productionCountries: List<ProductionCountriesItem?>? = null,
 
 @field:SerializedName("id")
-val id: Int? = null,
+val id: Int,
 
 @field:SerializedName("vote_count")
 val voteCount: Int? = null,
@@ -43,7 +43,7 @@ val voteCount: Int? = null,
 val budget: Int? = null,
 
 @field:SerializedName("overview")
-val overview: String? = null,
+val overview: String,
 
 @field:SerializedName("original_title")
 val originalTitle: String? = null,
@@ -52,7 +52,7 @@ val originalTitle: String? = null,
 val runtime: Int? = null,
 
 @field:SerializedName("poster_path")
-val posterPath: Any? = null,
+val posterPath: Any,
 
 @field:SerializedName("spoken_languages")
 val spokenLanguages: List<SpokenLanguagesItem?>? = null,
@@ -61,10 +61,10 @@ val spokenLanguages: List<SpokenLanguagesItem?>? = null,
 val productionCompanies: List<ProductionCompaniesItem?>? = null,
 
 @field:SerializedName("release_date")
-val releaseDate: String? = null,
+val releaseDate: String,
 
 @field:SerializedName("vote_average")
-val voteAverage: Double? = null,
+val voteAverage: Double,
 
 @field:SerializedName("belongs_to_collection")
 val belongsToCollection: Any? = null,

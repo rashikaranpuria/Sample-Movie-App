@@ -14,22 +14,26 @@ import kotlin.properties.Delegates
 
 class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(), AutoUpdatableAdapter {
 
+    lateinit var movieClickListener: (it: Movie)->Unit
+
     var movieList: List<Movie> by Delegates.observable(emptyList()) {
         _, oldList, newList ->
         autoNotify(oldList, newList) { o, n -> o.id == n.id }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, null, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
+            MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, null, false))
 
     override fun getItemCount(): Int = movieList.count()
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movieList.get(position))
+        holder.v.setOnClickListener {
+            movieClickListener(movieList[position])
+        }
     }
 
-    inner class MovieViewHolder(private var v: View) : RecyclerView.ViewHolder(v) {
+    inner class MovieViewHolder(var v: View) : RecyclerView.ViewHolder(v) {
         var titleView: TextView = v.findViewById(R.id.textView)
         var posterView: ImageView = v.findViewById(R.id.movie_poster)
 

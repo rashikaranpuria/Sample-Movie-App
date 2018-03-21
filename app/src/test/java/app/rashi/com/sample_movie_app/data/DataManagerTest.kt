@@ -57,4 +57,13 @@ class DataManagerTest {
         // then
         verify(mDbManager).addMovies(movies)
     }
+
+    @Test
+    fun shouldCallGetMovieDetailFromAPI_WhenFetchMovieDetailFromAPI() {
+        val dummyId = "45"
+        // when
+        mDataManager.fetchMovieDetailFromAPI(dummyId)
+        // given
+        verify(mApiManager).fetchMovieDetail(dummyId)
+    }
 }

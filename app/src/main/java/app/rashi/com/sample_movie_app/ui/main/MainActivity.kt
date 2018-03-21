@@ -1,23 +1,25 @@
 package app.rashi.com.sample_movie_app.ui.main
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import app.rashi.com.sample_movie_app.Constants
 import app.rashi.com.sample_movie_app.MovieApplication
 import app.rashi.com.sample_movie_app.R
 import app.rashi.com.sample_movie_app.data.db.entities.Movie
 import app.rashi.com.sample_movie_app.di.Modules.MainActivityModule
 import app.rashi.com.sample_movie_app.ui.base.BaseActivity
+import app.rashi.com.sample_movie_app.ui.detail.MovieDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), IMainActivityView {
-
     @Inject
     lateinit var mMainActivityPresenter: IMainActivityPresenter<IMainActivityView>
 
     @Inject
+    override
     lateinit var mProgressDialog: ProgressDialog
 
     @Inject
@@ -33,7 +35,9 @@ class MainActivity : BaseActivity(), IMainActivityView {
         movie_list.setHasFixedSize(true)
         movie_list.layoutManager = GridLayoutManager(this, 2)
         movie_list.adapter = mAdapter
-
+        mAdapter.movieClickListener = {
+            mMainActivityPresenter.movieListItemClicked(it.id)
+        }
         mMainActivityPresenter.onAttach(this)
     }
 
@@ -46,15 +50,9 @@ class MainActivity : BaseActivity(), IMainActivityView {
         mAdapter.movieList = results
     }
 
-    override fun showError(errorStr: String) {
-        toast(errorStr)
-    }
-
-    override fun hideProgressDialog() {
-        mProgressDialog.hide()
-    }
-
-    override fun showProgressBar() {
-        mProgressDialog.show()
+    override fun openDetailActivity(movieId: Int) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra(Constants.MOVIE_ID, movieId)
+        startActivity(intent)
     }
 }

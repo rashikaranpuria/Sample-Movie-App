@@ -24,7 +24,7 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:id="@+id/expandedImage"
+                android:id="@+id/posterImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_height"
                 android:scaleType="centerCrop"
@@ -45,7 +45,7 @@
     <include layout="@layout/content_movie_detail" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/favButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"

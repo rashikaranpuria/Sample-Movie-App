@@ -30,4 +30,8 @@ class AppModule(val app: Application) {
     @Provides
     @Singleton
     fun provideMovieDao() = MovieDatabase.getInstance(context = app).movieDao()
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailDao() = MovieDatabase.getInstance(context = app).movieDetailDao()
 }
