@@ -42,18 +42,16 @@ class MovieDetailActivity : BaseActivity(), IMovieDetailView {
     }
 
     override fun setMovieDetail(movieDetail: MovieDetail) {
-        toolbar_layout.title=movieDetail.title
+        toolbar_layout.title = movieDetail.title
         Picasso.with(this).load("http://image.tmdb.org/t/p/w342/${movieDetail.poster_path}").into(posterImage)
         overview.text = movieDetail.overview
         release_date.text = movieDetail.release_date
         vote_average.text = movieDetail.vote_average
         if (movieDetail.favorite) {
             favButton.setImageResource(R.drawable.ic_favorite)
-        }
-        else {
+        } else {
             favButton.setImageResource(R.drawable.ic_favorite_border)
         }
-
     }
 
     override fun onDestroy() {
