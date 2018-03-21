@@ -1,6 +1,5 @@
 package app.rashi.com.sample_movie_app.ui.detail
 
-import android.util.Log
 import app.rashi.com.sample_movie_app.data.IDataManager
 import app.rashi.com.sample_movie_app.data.api.model.MovieDetailResponse.MovieDetailResponse
 import app.rashi.com.sample_movie_app.data.db.entities.MovieDetail
@@ -28,18 +27,17 @@ class MovieDetailPresenter<V : IMovieDetailView> @Inject constructor(private val
             .subscribeBy (
                 onSuccess = {
                     // Got movie detail from database
-                    Log.d("movie detail", "on success")
                     updateViewWithMovieDetail(it)
+                    view?.hideProgressDialog()
                 },
                 onError = {
                     // some error occured
-                    Log.d("movie detail", "on error")
                     view?.showError(it.localizedMessage)
+                    view?.hideProgressDialog()
                 },
                 onComplete = {
                     // did not find movie detail in database
                     // retrieve from API
-                    Log.d("movie detail", "on complete")
                     mCompositeDisposable.add(mDataManager
                         .fetchMovieDetailFromAPI(movieId)
                         .map {
@@ -47,7 +45,6 @@ class MovieDetailPresenter<V : IMovieDetailView> @Inject constructor(private val
                         }
                         .doOnSuccess {
                             Completable.fromAction {
-                                Log.d("movie detail", "on complete success")
                                 mDataManager.addMovieDetail(it)
                             }.subscribe()
                         }
@@ -55,12 +52,12 @@ class MovieDetailPresenter<V : IMovieDetailView> @Inject constructor(private val
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeBy (
                                 onSuccess = {
-                                    Log.d("movie detail", "on done")
                                     updateViewWithMovieDetail(it)
+                                    view?.hideProgressDialog()
                                 },
                                 onError = {
-                                    Log.d("movie detail", "on nah")
                                     view?.showError(it.localizedMessage)
+                                    view?.hideProgressDialog()
                                 }
                         ))
                 }

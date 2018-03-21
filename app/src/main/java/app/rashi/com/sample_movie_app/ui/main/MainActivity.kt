@@ -41,11 +41,6 @@ class MainActivity : BaseActivity(), IMainActivityView {
         mMainActivityPresenter.onAttach(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mMainActivityPresenter.onDetach()
-    }
-
     override fun addMoviesToList(results: List<Movie>) {
         mAdapter.movieList = results
     }
@@ -54,5 +49,11 @@ class MainActivity : BaseActivity(), IMainActivityView {
         val intent = Intent(this, MovieDetailActivity::class.java)
         intent.putExtra(Constants.MOVIE_ID, movieId)
         startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mMainActivityPresenter.onDetach()
+        mProgressDialog.dismiss()
     }
 }
