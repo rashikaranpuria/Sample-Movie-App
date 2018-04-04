@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import app.rashi.com.sample_movie_app.R
 import app.rashi.com.sample_movie_app.data.db.entities.Movie
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlin.properties.Delegates
 
 class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(), AutoUpdatableAdapter {
@@ -39,7 +39,8 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Mov
 
         fun bind(movieItem: Movie) {
             titleView.text = movieItem.title
-            Picasso.with(context).load("http://image.tmdb.org/t/p/w342/${movieItem.poster_path}").into(posterView)
+            Glide.with(context).load("http://image.tmdb.org/t/p/w342/${movieItem.poster_path}").thumbnail(0.1f).into(posterView)
+//            Picasso.with(context).load("http://image.tmdb.org/t/p/w342/${movieItem.poster_path}").into(posterView)
         }
     }
 }

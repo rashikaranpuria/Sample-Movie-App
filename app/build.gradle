@@ -95,6 +95,10 @@ dependencies {
 
     // Stetho
     implementation 'com.facebook.stetho:stetho:1.5.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
 }
 task ktlint(type: JavaExec, group: "verification") {
     description = "Check Kotlin code style."
