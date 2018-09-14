@@ -22,12 +22,12 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Mov
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
-            MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, null, false))
+            MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_thumb, parent, false))
 
     override fun getItemCount(): Int = movieList.count()
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movieList.get(position))
+        holder.bind(movieList.get(holder.adapterPosition))
         holder.v.setOnClickListener {
             movieClickListener(movieList[position])
         }
