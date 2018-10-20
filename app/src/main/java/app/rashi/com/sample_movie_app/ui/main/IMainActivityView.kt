@@ -5,5 +5,4 @@ import app.rashi.com.sample_movie_app.ui.base.IBaseView
 
 interface IMainActivityView : IBaseView {
     fun addMoviesToList(results: List<Movie>)
-    fun openDetailActivity(movieId: Int)
 }

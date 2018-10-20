@@ -1,23 +1,10 @@
 package app.rashi.com.sample_movie_app.data.db
 
 import app.rashi.com.sample_movie_app.data.db.entities.Movie
-import app.rashi.com.sample_movie_app.data.db.entities.MovieDetail
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 import javax.inject.Inject
 
-class DbManager @Inject constructor(val mMovieDao: MovieDao, val mMovieDetailDao: MovieDetailDao) : IDbManager {
-    override fun updateMovieDetail(movieId: Int, isFavorite: Boolean) {
-        mMovieDetailDao.setIsMovieFavorite(isFavorite, movieId)
-    }
-
-    override fun getMovieDetail(movieId: Int): Maybe<MovieDetail> {
-        return mMovieDetailDao.getMovieDetailById(movieId)
-    }
-
-    override fun addMovieDetail(movieDetail: MovieDetail) {
-        mMovieDetailDao.insertMovieDetail(movieDetail)
-    }
+class DbManager @Inject constructor(val mMovieDao: MovieDao) : IDbManager {
 
     override fun addMovies(movies: List<Movie>) {
         mMovieDao.insertAll(movies)

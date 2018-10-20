@@ -13,10 +13,6 @@ import javax.inject.Inject
 
 class MainActivityPresenter<V : IMainActivityView> @Inject constructor(private val mDataManager: IDataManager, private val mCompositeDisposable: CompositeDisposable) : BasePresenter<V>(), IMainActivityPresenter<V> {
 
-    override fun movieListItemClicked(movieId: Int) {
-        view?.openDetailActivity(movieId)
-    }
-
     override fun onAttach(v: V) {
         super.onAttach(v)
         view?.showProgressBar()

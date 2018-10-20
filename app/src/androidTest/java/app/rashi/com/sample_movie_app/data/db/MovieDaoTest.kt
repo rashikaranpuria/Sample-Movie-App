@@ -44,7 +44,7 @@ class MovieDaoTest {
     }
 
     @Test
-    fun shouldInsrtMovie() {
+    fun shouldInsertMovie() {
         //when
         database.movieDao().insertMovie(MOVIE_ITEM)
         //then
